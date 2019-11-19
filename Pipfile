@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 jupyter = "*"
 jupyterthemes = "*"
+xmltodict = "*"
 
 [dev-packages]
 
