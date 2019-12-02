@@ -8,6 +8,7 @@ jupyter = "*"
 jupyterthemes = "*"
 xmltodict = "*"
 requests = "*"
+"beautifulsoup4" = "*"
 
 [dev-packages]
 
