@@ -9,6 +9,7 @@ jupyterthemes = "*"
 xmltodict = "*"
 requests = "*"
 "beautifulsoup4" = "*"
+pillow = "*"
 
 [dev-packages]
 
