@@ -10,6 +10,9 @@ xmltodict = "*"
 requests = "*"
 "beautifulsoup4" = "*"
 pillow = "*"
+grab = "*"
+pyquery = "*"
+pandas = "*"
 
 [dev-packages]
 
