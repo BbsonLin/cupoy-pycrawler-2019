@@ -13,6 +13,7 @@ pillow = "*"
 grab = "*"
 pyquery = "*"
 pandas = "*"
+selenium = "*"
 
 [dev-packages]
 
