@@ -3,7 +3,7 @@ D26：Scrapy 爬蟲流程 (1) - 建立流程 + 送出請求
 
 Code
 -----
-[myproject/myproject/spiders/ptt_crawler.py](https://github.com/BbsonLin/cupoy-pycrawler-2019/blob/master/myproject/myproject/spiders/ptt_crawler.py)
+[myproject/myproject/spiders/ptt_crawler.py](https://github.com/BbsonLin/cupoy-pycrawler-2019/blob/2d2dac281f963f1a90a926600af591f5800a4341/myproject/myproject/spiders/ptt_crawler.py)
 
 Output
 -----
