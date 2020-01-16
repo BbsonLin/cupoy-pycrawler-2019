@@ -1,0 +1,102 @@
+D26：Scrapy 爬蟲流程 (1) - 建立流程 + 送出請求
+=====
+
+Code
+-----
+[myproject/myproject/spiders/ptt_crawler.py](https://github.com/BbsonLin/cupoy-pycrawler-2019/blob/master/myproject/myproject/spiders/ptt_crawler.py)
+
+Output
+-----
+
+```
+PS E:\Code\dev-projects\Cupoy\pycrawler\myproject> scrapy.exe crawl ptt_crawler      
+2020-01-16 15:11:58 [scrapy.utils.log] INFO: Scrapy 1.8.0 started (bot: myproject)
+2020-01-16 15:11:58 [scrapy.utils.log] INFO: Versions: lxml 4.4.2.0, libxml2 2.9.5, cssselect 1.1.0, parsel 1.5.2, w3lib 1.21.0, Twisted 19.10.0, Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:54:40) [MSC v.1900 64 bit (AMD64)], pyOpenSSL 19.1.0 (OpenSSL 1.1.1d  10 Sep 2019), cryptography 2.8, Platform Windows-10-10.0.18362-SP0
+2020-01-16 15:11:58 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'myproject', 'EDITOR': 'D:\\Microsoft VS Code\\Code.exe', 'NEWSPIDER_MODULE': 'myproject.spiders', 'ROBOTSTXT_OBEY': True, 'SPIDER_MODULES': ['myproject.spiders']}
+2020-01-16 15:11:58 [scrapy.extensions.telnet] INFO: Telnet Password: 221288145a89dfe7
+2020-01-16 15:11:58 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2020-01-16 15:11:58 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',   
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2020-01-16 15:11:58 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2020-01-16 15:11:58 [scrapy.middleware] INFO: Enabled item pipelines:
+[]
+2020-01-16 15:11:58 [scrapy.core.engine] INFO: Spider opened
+2020-01-16 15:11:58 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2020-01-16 15:11:58 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2020-01-16 15:11:59 [scrapy.core.engine] DEBUG: Crawled (404) <GET https://www.ptt.cc/robots.txt> (referer: None)
+2020-01-16 15:11:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.ptt.cc/bbs/NBA/M.1579141804.A.812.html> (referer: None)
+2020-01-16 15:11:59 [py.warnings] WARNING: E:\Code\dev-projects\Cupoy\pycrawler\myproject\myproject\spiders\ptt_crawler.py:25: UserWarning: No parser was explicitly specified, so I'm using the best available HTML parser for this system ("lxml"). This usually isn't a problem, but if you run this code on another system, or in a different virtual environment, it may use a different parser and behave differently.
+
+The code that caused this warning is on line 25 of the file E:\Code\dev-projects\Cupoy\pycrawler\myproject\myproject\spiders\ptt_crawler.py. To get rid of this warning, pass the 
+additional argument 'features="lxml"' to the BeautifulSoup constructor.
+
+  soup = BeautifulSoup(response.text)
+
+2020-01-16 15:12:00 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.ptt.cc/bbs/NBA/M.1579141804.A.812.html>
+{'url': 'https://www.ptt.cc/bbs/NBA/M.1579141804.A.812.html', 'article_author': 'Rambo (香帥)', 'article_title': '[Live] 獨行俠 @ 國王', 'article_date': 'Thu Jan 16 10:30:01 2020', 'article_content': '11:00 開打      獨行俠 VS 國王 NBATV 直播   NBA TODAY  1/15 2020   Starting Lineup Starting Lineup                            XX  L. Doncic   XX  D. Fox XX  T. Hardaway Jr.    XX  B. Hield XX  D. FinneySmith XX  H. Barnes XX  M. Kleber XX  N. Bjelica XX  D. Powell                                XX  H. Giles III null [Live] 獨行俠 @ 國王\n\nsac01 ~ sac03\n\n\n線上 BOX: http://cutt.us/ojMnC http://blog.xuite.net/baseballman/blog NBA每日線上高光  線上Top10 https://goo.gl/YGH7x7 Chrome extensions to Play Stream\n\n https://www.ptt.cc/bbs/NBA/M.1579141804.A.812.html', 'ip': '65.78.10.87', 'message_count': {'all': 131, 'count': 88, 'push': 94, 'boo': 6, 'neutral': 31}, 'messages': [{'push_tag': '推', 'push_userid': 'mose56789', 'push_content': '求你王輕虐QQ', 'push_ipdatetime': '01/16 10:31'}, {'push_tag': '推', 'push_userid': 'ijk77692', 'push_content': '獨行 
+俠贏的話 三樓立馬娶五樓做老婆', 'push_ipdatetime': '01/16 10:32'}, {'push_tag': '推', 'push_userid': 'bug198874', 'push_content': '好', 'push_ipdatetime': '01/16 10:32'}, {'push_tag': '推', 'push_userid': 'inthenchen', 'push_content': '可以不要嗎', 'push_ipdatetime': '01/16 10:32'}, {'push_tag': '→', 'push_userid': 'inthenchen', 'push_content': '沒搶到三
+樓，可惡', 'push_ipdatetime': '01/16 10:33'}, {'push_tag': '→', 'push_userid': 'bug198874', 'push_content': '所以搶5樓來嫁給我，很好', 'push_ipdatetime': '01/16 10:33'}, {'push_tag': '推', 'push_userid': 'ijk77692', 'push_content': '樓上超閃 祝福百年好合', 'push_ipdatetime': '01/16 10:33'}, {'push_tag': '→', 'push_userid': 'inthenchen', 'push_content': '我是四樓好嗎？沒推到欸欸欸', 'push_ipdatetime': '01/16 10:34'}, {'push_tag': '→', 'push_userid': 'inthenchen', 'push_content': '阿阿阿不要阿阿阿', 'push_ipdatetime': '01/16 10:34'}, {'push_tag': '→', 'push_userid': 'bug198874', 'push_content': '來不及了，跪求77成全', 'push_ipdatetime': '01/16 10:34'}, {'push_tag': '推', 'push_userid': 'MK47', 'push_content': '這推文都不覺得尷尬= =?', 'push_ipdatetime': '01/16 10:35'}, {'push_tag': '→', 'push_userid': 'earldunn', 'push_content': '請勿在LIVE文裡公然放閃', 'push_ipdatetime': '01/16 10:38'}, {'push_tag': '→', 'push_userid': 'cpeyeshield', 'push_content': '走錯版了？', 'push_ipdatetime': '01/16 10:38'}, {'push_tag': '推', 'push_userid': 'wx190', 'push_content': '連在這都要被閃 可以不用這樣喔', 'push_ipdatetime': '01/16 10:39'}, {'push_tag': '推', 'push_userid': 'duece0927', 'push_content': '....', 'push_ipdatetime': '01/16 10:40'}, 
+{'push_tag': '推', 'push_userid': 'qpeter', 'push_content': '這場難打 上次B2B對國王就沒贏', 'push_ipdatetime': '01/16 10:45'}, {'push_tag': '推', 'push_userid': 'wudirk', 'push_content': 'KP又不上了', 'push_ipdatetime': '01/16 10:46'}, {'push_tag': '推', 'push_userid': 'yasan1029', 'push_content': '三樓五樓太閃', 'push_ipdatetime': '01/16 10:50'}, {'push_tag': '噓', 'push_userid': 'attpp', 'push_content': '無聊推文', 'push_ipdatetime': '01/16 11:01'}, {'push_tag': '推', 'push_userid': 'lens82801', 'push_content': '推文在幹嘛 XD', 'push_ipdatetime': '01/16 11:03'}, {'push_tag': '推', 'push_userid': 'bcqqa7785', 'push_content': '國王隊的Logo怎麼變英超了==', 'push_ipdatetime': '01/16 11:18'}, {'push_tag': 
+'噓', 'push_userid': 'mickeygg69', 'push_content': '尷尬推文 可憐哪', 'push_ipdatetime': '01/16 11:21'}, {'push_tag': '→', 'push_userid': 'mose56789', 'push_content': '77這兩場的
+第一節好像都不少失誤？', 'push_ipdatetime': '01/16 11:28'}, {'push_tag': '噓', 'push_userid': 'lowl99', 'push_content': '國王隊常常一直吃鍋貼，不可能贏獨行俠', 'push_ipdatetime': '01/16 11:29'}, {'push_tag': '推', 'push_userid': 'mose56789', 'push_content': '上次交手你王就贏我犢了啊', 'push_ipdatetime': '01/16 11:30'}, {'push_tag': '噓', 'push_userid': 'qaz19wsx96', 'push_content': '77三分超鐵欸', 'push_ipdatetime': '01/16 11:31'}, {'push_tag': '推', 'push_userid': 'jj3414im', 'push_content': '沒空檔直接投當然鐵', 'push_ipdatetime': '01/16 11:36'}, {'push_tag': '推', 'push_userid': 'qpeter', 'push_content': '今天Q1打得比昨天有活力多了 不像B2B第二場', 'push_ipdatetime': '01/16 11:38'}, {'push_tag': '推', 'push_userid': 'oceanjy6662', 'push_content': '感覺小雞變壯很多', 'push_ipdatetime': '01/16 11:41'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': 'Doncic三分命 
+中率真的不合格', 'push_ipdatetime': '01/16 11:43'}, {'push_tag': '推', 'push_userid': 'matter224', 'push_content': '77最近都有數據不穩的狀況@@', 'push_ipdatetime': '01/16 11:53'}, {'push_tag': '推', 'push_userid': 'etjj', 'push_content': '請問今天沒有live連結嗎', 'push_ipdatetime': '01/16 11:55'}, {'push_tag': '推', 'push_userid': 'mose56789', 'push_content': '...live連結都禁半年了 老兄', 'push_ipdatetime': '01/16 11:59'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': 'Doncic感覺今天又很可能大三元了', 'push_ipdatetime': '01/16 12:00'}, {'push_tag': '推', 'push_userid': 'qaz19wsx96', 'push_content': '77投3分對方都開始放了', 'push_ipdatetime': '01/16 12:01'}, {'push_tag': '推', 'push_userid': 'panda8888', 'push_content': '咖哩今天是哥哥模式', 'push_ipdatetime': '01/16 12:01'}, {'push_tag': '推', 'push_userid': 'k1230588', 'push_content': '71：67 這有在防守嗎', 'push_ipdatetime': '01/16 12:07'}, {'push_tag': '推', 'push_userid': 'cama', 'push_content': 'https://youtu.be/H-kA3UtBj4M', 'push_ipdatetime': '01/16 12:13'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': '第三節才剛開始沒多久就只差一助攻就大三元..', 'push_ipdatetime': '01/16 12:22'}, {'push_tag': '→', 'push_userid': 'jeff1013', 'push_content': '大三元了', 'push_ipdatetime': '01/16 12:24'}, {'push_tag': '推', 'push_userid': 'MK47', 'push_content': '大三元跟喝水一樣', 'push_ipdatetime': '01/16 12:25'}, {'push_tag': 
+'推', 'push_userid': 'jardon', 'push_content': '19分鐘大三元', 'push_ipdatetime': '01/16 12:25'}, {'push_tag': '推', 'push_userid': 'potterpig', 'push_content': '大三元對77來說真
+的好容易...', 'push_ipdatetime': '01/16 12:25'}, {'push_tag': '→', 'push_userid': 'billy759552', 'push_content': '國王現在那麼爛還要輕虐', 'push_ipdatetime': '01/16 12:26'}, {'push_tag': '→', 'push_userid': 'MK47', 'push_content': '看到上面J大推文才發現077打19分鐘就大三元了......', 'push_ipdatetime': '01/16 12:27'}, {'push_tag': '推', 'push_userid': 'jackal44748', 'push_content': 'THJ這節太罩了', 'push_ipdatetime': '01/16 12:29'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': '兩邊防守都滿破的這場', 'push_ipdatetime': '01/16 12:30'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': 'Doncic這場要超大型大三元了XDD', 'push_ipdatetime': '01/16 12:35'}, {'push_tag': '推', 'push_userid': 'yt010004', 'push_content': '這樣打下去 還真有機會30-20-20', 'push_ipdatetime': '01/16 12:36'}, {'push_tag': '推', 'push_userid': 'jj3414im', 'push_content': '隊友在幫忙 
+補昨天的助攻啦', 'push_ipdatetime': '01/16 12:39'}, {'push_tag': '推', 'push_userid': 'oceanjy6662', 'push_content': '補助攻XD', 'push_ipdatetime': '01/16 12:39'}, {'push_tag': '推', 'push_userid': 'eastsea1', 'push_content': '天賜良緣！', 'push_ipdatetime': '01/16 12:40'}, {'push_tag': '推', 'push_userid': 'jackal44748', 'push_content': 'FOX真的有夠快', 'push_ipdatetime': '01/16 12:41'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': '油雞比裁判還小一號XDD', 'push_ipdatetime': '01/16 12:41'}, {'push_tag': '推', 'push_userid': 'joll150', 'push_content': '想看20-20-20', 'push_ipdatetime': '01/16 12:44'}, {'push_tag': '推', 'push_userid': 'elvisleeee', 'push_content': '這幾個判決都很偏國王 
+阿', 'push_ipdatetime': '01/16 12:46'}, {'push_tag': '推', 'push_userid': 'SwissMiniGun', 'push_content': '好好穩住 我牛加油!', 'push_ipdatetime': '01/16 12:47'}, {'push_tag': ' 
+推', 'push_userid': 'MK47', 'push_content': '主場多少都會有一點吧 不要很離譜就好了', 'push_ipdatetime': '01/16 12:47'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': '羅國蝦', 'push_ipdatetime': '01/16 12:48'}, {'push_tag': '推', 'push_userid': 'jackal44748', 'push_content': 'JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ', 'push_ipdatetime': '01/16 12:48'}, {'push_tag': '推', 'push_userid': 'glay7566', 'push_content': 'JJJJJJJJJJJJJJJJJJJJ', 'push_ipdatetime': '01/16 12:49'}, {'push_tag': '推', 'push_userid': 'dy1278dy', 'push_content': 'JJ!', 'push_ipdatetime': '01/16 12:49'}, {'push_tag': '推', 'push_userid': 'SwissMiniGun', 'push_content': 'JJ壓哨 爽喔', 'push_ipdatetime': '01/16 12:49'}, {'push_tag': '推', 'push_userid': 'seishin', 'push_content': '水', 'push_ipdatetime': '01/16 12:49'}, {'push_tag': '推', 'push_userid': 'money2011', 'push_content': 'JJJJJJJJJJJJJJJJJJ', 
+'push_ipdatetime': '01/16 12:49'}, {'push_tag': '推', 'push_userid': 'qpeter', 'push_content': '35 36 37', 'push_ipdatetime': '01/16 12:49'}, {'push_tag': '推', 'push_userid': 'lalacoco', 'push_content': 'JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ', 'push_ipdatetime': '01/16 12:49'}, {'push_tag': '推', 'push_userid': 'ohiyo104', 'push_content': 'JJJJJJJJJJJ', 'push_ipdatetime': '01/16 12:49'}, {'push_tag': '推', 'push_userid': 'snoobi', 'push_content': '壓哨！！', 'push_ipdatetime': '01/16 12:50'}, {'push_tag': '推', 'push_userid': 'oceanjy6662', 'push_content': '舒服', 'push_ipdatetime': '01/16 12:50'}, {'push_tag': '推', 'push_userid': 'MK47', 'push_content': '好屌', 'push_ipdatetime': '01/16 12:50'}, {'push_tag': '→', 'push_userid': 'ericrobin', 'push_content': '每個人都在練logo shot嗎..', 'push_ipdatetime': '01/16 12:50'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': '第四節國王爆打回一波', 'push_ipdatetime': '01/16 12:53'}, {'push_tag': '推', 'push_userid': 'SwissMiniGun', 'push_content': '目前助攻15次 平77自己單場最高', 'push_ipdatetime': '01/16 12:56'}, {'push_tag': '推', 'push_userid': 'jardon', 'push_content': '小牛也回敬6-0', 'push_ipdatetime': '01/16 13:00'}, {'push_tag': '推', 'push_userid': 
+'jeff1013', 'push_content': 'Fox的切入真的好難防', 'push_ipdatetime': '01/16 13:03'}, {'push_tag': '→', 'push_userid': 'jeff1013', 'push_content': '但罰球有夠悲劇', 'push_ipdatetime': '01/16 13:04'}, {'push_tag': '推', 'push_userid': 'jackal44748', 'push_content': '兩邊一起卡彈', 'push_ipdatetime': '01/16 13:07'}, {'push_tag': '推', 'push_userid': 'mose56789', 'push_content': 'Hield... LOL', 'push_ipdatetime': '01/16 13:07'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': '回到10分差', 'push_ipdatetime': '01/16 13:07'}, {'push_tag': '推', 'push_userid': 'mose56789', 'push_content': '77被吃假的', 'push_ipdatetime': '01/16 13:08'}, {'push_tag': '推', 'push_userid': 'mose56789', 'push_content': 'THJJJJJJJJJ', 'push_ipdatetime': '01/16 13:10'}, {'push_tag': '推', 'push_userid': 'mose56789', 'push_content': 'QQ  進攻有點卡', 'push_ipdatetime': '01/16 13:13'}, {'push_tag': '噓', 'push_userid': 'jeff1013', 'push_content': '裁判', 'push_ipdatetime': '01/16 13:14'}, {'push_tag': '→', 'push_userid': 'jeff1013', 'push_content': '好吧 我錯了 重播好 
+像有摸到', 'push_ipdatetime': '01/16 13:15'}, {'push_tag': '推', 'push_userid': 'mose56789', 'push_content': '挑戰了 這球的確有點怪Y', 'push_ipdatetime': '01/16 13:15'}, {'push_tag': '推', 'push_userid': 'lalacoco', 'push_content': '這個也算犯規  補哨吧?', 'push_ipdatetime': '01/16 13:16'}, {'push_tag': '→', 'push_userid': 'mose56789', 'push_content': ' 
+啊 有先拉到左手', 'push_ipdatetime': '01/16 13:16'}, {'push_tag': '推', 'push_userid': 'SwissMiniGun', 'push_content': '罰球好好穩住', 'push_ipdatetime': '01/16 13:17'}, {'push_tag': '推', 'push_userid': 'mose56789', 'push_content': '可以啦 今天才第一個MISS', 'push_ipdatetime': '01/16 13:17'}, {'push_tag': '→', 'push_userid': 'mose56789', 'push_content': '哇 HIELD這姿勢還進XD', 'push_ipdatetime': '01/16 13:18'}, {'push_tag': '→', 'push_userid': 'SwissMiniGun', 'push_content': 'XD我是罰之前推的', 'push_ipdatetime': '01/16 13:18'}, {'push_tag': '推', 'push_userid': 'LKN555', 'push_content': '看不懂運運運  完全沒打算出手?', 'push_ipdatetime': '01/16 13:18'}, {'push_tag': '→', 'push_userid': 'mose56789', 'push_content': '就傳球路線都被踩死了吧', 'push_ipdatetime': '01/16 13:19'}, {'push_tag': '→', 'push_userid': 'mose56789', 'push_content': '怎麼變跳球 LUL', 'push_ipdatetime': '01/16 13:19'}, {'push_tag': '→', 'push_userid': 'mose56789', 'push_content': '靠 差點QQ', 'push_ipdatetime': '01/16 13:19'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': '國王這放槍送走比賽了', 'push_ipdatetime': '01/16 13:19'}, {'push_tag': '推', 'push_userid': 'richi', 'push_content': '拉鋸的時候沒有77以外的戰術嗎 一直讓他被包死', 'push_ipdatetime': '01/16 13:20'}, {'push_tag': '→', 'push_userid': 'jeff1013', 'push_content': '連續兩個籃下放槍有夠傷', 'push_ipdatetime': '01/16 13:20'}, {'push_tag': '→', 'push_userid': 'mose56789', 'push_content': '好險沒被補進', 'push_ipdatetime': '01/16 13:21'}, {'push_tag': '推', 'push_userid': 'LGHa', 'push_content': 'Powell打得很好', 'push_ipdatetime': '01/16 13:21'}, {'push_tag': '推', 'push_userid': 'luck945', 'push_content': '炮這幾個籃板搶得好', 'push_ipdatetime': '01/16 13:21'}, {'push_tag': '推', 'push_userid': 'LKN555', 'push_content': '炮最近好罩', 'push_ipdatetime': '01/16 13:21'}, {'push_tag': '推', 'push_userid': 'SwissMiniGun', 'push_content': '現在還真的沒有 有能力確實執行戰術的..QQ', 'push_ipdatetime': '01/16 13:21'}, {'push_tag': '推', 'push_userid': 'SuperBMW', 'push_content': '小犢第四節真的很考驗球迷心臟XDDDDD', 'push_ipdatetime': '01/16 13:22'}, {'push_tag': '推', 'push_userid': 'dotless', 'push_content': '沒有KP真的傷...', 'push_ipdatetime': '01/16 13:22'}, {'push_tag': '推', 'push_userid': 'qpeter', 'push_content': 'Powell連兩次
+重要的爭搶', 'push_ipdatetime': '01/16 13:22'}, {'push_tag': '推', 'push_userid': 'SwissMiniGun', 'push_content': '紀錄之夜  穩住!!', 'push_ipdatetime': '01/16 13:23'}, {'push_tag': '→', 'push_userid': 'SuperBMW', 'push_content': '剩下27秒  到底誰會先持球 ==', 'push_ipdatetime': '01/16 13:24'}, {'push_tag': '推', 'push_userid': 'mose56789', 'push_content': '又MISS一顆 怕啦', 'push_ipdatetime': '01/16 13:26'}, {'push_tag': '→', 'push_userid': 'SwissMiniGun', 'push_content': '這種關鍵時刻  我們數據就是倒數 沒辦法XD', 'push_ipdatetime': '01/16 13:27'}, {'push_tag': '→', 'push_userid': 'mose56789', 'push_content': '怎麼有人在喊MVP LOL', 'push_ipdatetime': '01/16 13:27'}, {'push_tag': '→', 'push_userid': 'SwissMiniGun', 'push_content': 'THJ發球我很怕', 'push_ipdatetime': '01/16 13:27'}, {'push_tag': '推', 'push_userid': 'jeff1013', 'push_content': '結束', 'push_ipdatetime': '01/16 13:27'}, {'push_tag': '→', 'push_userid': 'SwissMiniGun', 'push_content': '還好有發出來', 'push_ipdatetime': '01/16 13:28'}, {'push_tag': '推', 'push_userid': 'jj3414im', 'push_content': '關門每次都在劇場', 'push_ipdatetime': '01/16 13:28'}, {'push_tag': '推', 'push_userid': 'bokituto', 'push_content': '讚', 'push_ipdatetime': '01/16 13:28'}, {'push_tag': '→', 'push_userid': 'SwissMiniGun', 'push_content': '依舊很抖', 'push_ipdatetime': '01/16 13:28'}, {'push_tag': '推', 'push_userid': 'dotless', 'push_content': '咖哩弟關鍵時刻罰
+球真的常失手....', 'push_ipdatetime': '01/16 13:28'}, {'push_tag': '→', 'push_userid': 'mose56789', 'push_content': '這罰球真的來練球迷心臟的XDDDDD', 'push_ipdatetime': '01/16 13:28'}, {'push_tag': '推', 'push_userid': 'LKN555', 'push_content': '連罰球都不太會了XDDDDD', 'push_ipdatetime': '01/16 13:28'}, {'push_tag': '推', 'push_userid': 'cococheng2', 'push_content': '嚇不到我的', 'push_ipdatetime': '01/16 13:28'}, {'push_tag': '→', 'push_userid': 'SwissMiniGun', 'push_content': '25/15/17 出賽109場 20次大三元達陣 生涯助攻新高', 
+'push_ipdatetime': '01/16 13:29'}, {'push_tag': '推', 'push_userid': 'jackal44748', 'push_content': '罰球還是不穩 最後好驚險', 'push_ipdatetime': '01/16 13:29'}, {'push_tag': '噓
+', 'push_userid': 'yugowolf', 'push_content': '罰球有夠爛的', 'push_ipdatetime': '01/16 13:29'}, {'push_tag': '推', 'push_userid': 'qpeter', 'push_content': '嚇死 總算是把這場B2B拿下了', 'push_ipdatetime': '01/16 13:29'}, {'push_tag': '推', 'push_userid': 'inthenchen', 'push_content': '乾，不會吧，獨行俠贏了', 'push_ipdatetime': '01/16 13:31'}, {'push_tag': '推', 'push_userid': 'ohiyo104', 'push_content': '真的是爛罰球...', 'push_ipdatetime': '01/16 13:31'}, {'push_tag': '推', 'push_userid': 'thibw13ug1', 'push_content': '每次第
+四節都不穩', 'push_ipdatetime': '01/16 13:31'}, {'push_tag': '→', 'push_userid': 'mose56789', 'push_content': 'LUL', 'push_ipdatetime': '01/16 13:32'}, {'push_tag': '推', 'push_userid': 'inthenchen', 'push_content': '不是說77打b2b必然慘淡竟然沒有？？', 'push_ipdatetime': '01/16 13:34'}]}
+2020-01-16 15:12:00 [scrapy.core.engine] INFO: Closing spider (finished)
+2020-01-16 15:12:00 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 531,
+ 'downloader/request_count': 2,
+ 'downloader/request_method_count/GET': 2,
+ 'downloader/response_bytes': 7001,
+ 'downloader/response_count': 2,
+ 'downloader/response_status_count/200': 1,
+ 'downloader/response_status_count/404': 1,
+ 'elapsed_time_seconds': 1.706012,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2020, 1, 16, 7, 12, 0, 141863),
+ 'item_scraped_count': 1,
+ 'log_count/DEBUG': 3,
+ 'log_count/INFO': 10,
+ 'log_count/WARNING': 1,
+ 'response_received_count': 2,
+ 'robotstxt/request_count': 1,
+ 'robotstxt/response_count': 1,
+ 'robotstxt/response_status_count/404': 1,
+ 'scheduler/dequeued': 1,
+ 'scheduler/dequeued/memory': 1,
+ 'scheduler/enqueued': 1,
+ 'scheduler/enqueued/memory': 1,
+ 'start_time': datetime.datetime(2020, 1, 16, 7, 11, 58, 435851)}
+2020-01-16 15:12:00 [scrapy.core.engine] INFO: Spider closed (finished)
+```
