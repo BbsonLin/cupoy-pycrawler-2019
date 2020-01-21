@@ -2,13 +2,17 @@
 import scrapy
 import re
 
+from pathlib import Path
+from urllib.parse import urlparse
 from bs4 import BeautifulSoup
+
+from myproject.items import PttArticleItem
 
 
 class PttCrawlerSpider(scrapy.Spider):
     name = 'ptt_crawler'
     allowed_domains = ['www.ptt.cc']
-    start_urls = ['https://www.ptt.cc/bbs/NBA/M.1579141804.A.812.html']
+    start_urls = ['https://www.ptt.cc/bbs/NBA/M.1579141804.A.812.html', 'https://www.ptt.cc/bbs/NBA/M.1579569920.A.142.html']
     cookies = {'over18': '1'}
 
     def start_requests(self):
@@ -127,14 +131,8 @@ class PttCrawlerSpider(scrapy.Spider):
                          b, 'push': p, 'boo': b, 'neutral': n}
 
         # 整理文章資訊
-        data = {
-            'url': response.url,
-            'article_author': author,
-            'article_title': title,
-            'article_date': date,
-            'article_content': content,
-            'ip': ip,
-            'message_count': message_count,
-            'messages': messages
-        }
+        article_id = str(Path(urlparse(response.url).path).stem)
+        data = PttArticleItem(id=article_id, url=response.url, author=author, title=title,
+                              date=date, content=content, comments=messages,
+                              comment_stats=message_count)
         yield data

@@ -8,7 +8,12 @@
 import scrapy
 
 
-class MyprojectItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class PttArticleItem(scrapy.Item):
+    id = scrapy.Field()
+    url = scrapy.Field()
+    author = scrapy.Field()
+    date = scrapy.Field()
+    title = scrapy.Field()
+    content = scrapy.Field()
+    comments = scrapy.Field()
+    comment_stats = scrapy.Field()
