@@ -12,8 +12,11 @@ from myproject.items import PttArticleItem
 class PttCrawlerSpider(scrapy.Spider):
     name = 'ptt_crawler'
     allowed_domains = ['www.ptt.cc']
-    start_urls = ['https://www.ptt.cc/bbs/NBA/M.1579141804.A.812.html', 'https://www.ptt.cc/bbs/NBA/M.1579569920.A.142.html']
     cookies = {'over18': '1'}
+
+    def __init__(self, start_urls, filename):
+        self.start_urls = start_urls
+        self.filename = filename
 
     def start_requests(self):
         for url in self.start_urls:
@@ -65,6 +68,7 @@ class PttCrawlerSpider(scrapy.Spider):
             ip = main_content.find(text=re.compile(u'※ 發信站:'))
             ip = re.search('[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*', ip).group()
         except Exception as e:
+            self.log(f'Exception: {e}')
             ip = ''
 
         # 移除文章主體中 '※ 發信站:', '◆ From:', 空行及多餘空白 (※ = u'\u203b', ◆ = u'\u25c6')
